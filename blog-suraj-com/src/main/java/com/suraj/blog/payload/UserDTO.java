@@ -1,5 +1,8 @@
 package com.suraj.blog.payload;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,8 +12,12 @@ import lombok.Setter;
 @Setter
 public class UserDTO {
 	private int id;
+	@NotNull
 	private String name;
+	@Email
 	private String email;
-	private String pasword;
+	@NotNull
+	private String password;
+	@NotNull
 	private String about;
 }
