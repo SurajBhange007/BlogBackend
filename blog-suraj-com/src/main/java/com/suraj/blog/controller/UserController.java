@@ -3,7 +3,10 @@ package com.suraj.blog.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +24,21 @@ public class UserController {
 	@GetMapping("/")
 	public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDto){
 		UserDTO createdUser = this.userService.createUser(userDto);
-		return  new ResponseEntity<UserDTO>(createdUser, HttpStatus.CREATED);
+		return  new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/{userId}")
+	public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO, @PathVariable Integer userId){
+		
+		UserDTO updatedUser = this.userService.updateUser(userDTO, userId);
+		
+		return ResponseEntity.ok(updatedUser);
+	}
+	
+	
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<?> deleteUser(@PathVariable Integer userId){
+		this.userService.deleteUser(userId);
+		return null;
 	}
 }
