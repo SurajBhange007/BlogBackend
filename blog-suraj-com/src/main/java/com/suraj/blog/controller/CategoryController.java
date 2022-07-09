@@ -2,10 +2,7 @@ package com.suraj.blog.controller;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.websocket.server.PathParam;
-
-import org.apache.catalina.connector.Response;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.suraj.blog.entity.Category;
 import com.suraj.blog.payload.ApiResponse;
 import com.suraj.blog.payload.CategoryDTO;
 import com.suraj.blog.service.CategoryService;
@@ -31,13 +27,13 @@ public class CategoryController {
 	private CategoryService categoryService;
 
 	@PostMapping("/")
-	public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
+	public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
 		CategoryDTO newCategory = this.categoryService.createCategory(categoryDTO);
 		return new ResponseEntity<CategoryDTO>(newCategory, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{catId}")
-	public ResponseEntity<CategoryDTO> updateCategory(@RequestBody CategoryDTO categoryDTO,
+	public ResponseEntity<CategoryDTO> updateCategory(@Valid @RequestBody CategoryDTO categoryDTO,
 			@PathVariable Integer catId) {
 		CategoryDTO newCategory = this.categoryService.updateCategory(categoryDTO, catId);
 		return new ResponseEntity<CategoryDTO>(newCategory, HttpStatus.OK);
