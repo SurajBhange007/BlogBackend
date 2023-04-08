@@ -5,6 +5,8 @@ import java.util.List;
 import com.suraj.blog.payload.UserDTO;
 
 public interface UserService {
+	
+	UserDTO registerNewUser(UserDTO userDTO);
 	UserDTO createUser(UserDTO userDTO);
 	UserDTO updateUser(UserDTO userDTO, Integer userID);
 	UserDTO getUserById(Integer userId);
